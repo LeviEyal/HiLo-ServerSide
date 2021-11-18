@@ -8,9 +8,10 @@ to post the data to the firebase realtime database
 const express = require("express");
 const bodyParser = require("body-parser");
 var admin = require("firebase-admin");
+var cors = require("cors");
 
 // Fetch the service account key JSON file contents
-var serviceAccount = require("./hilobudget-firebase-adminsdk-sq3hm-ecbbfdb22c.json");
+var serviceAccount = require("./hilobudget-firebase-adminsdk.json");
 
 // Initialize the app with a custom auth variable, limiting the server's access
 admin.initializeApp({
@@ -27,6 +28,7 @@ const port = process.env.PORT || 3000;
 //Middlewares:
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 //Endpoints:
 app.get("/", (req, res) => {
@@ -34,14 +36,14 @@ app.get("/", (req, res) => {
 });
 
 //Get all the data from the firebase realtime database
-app.get("/getData", (req, res) => {
-  db.ref("/users/user1").once("value", function (snapshot) {
+app.get("/getFields", (req, res) => {
+  db.ref().once("value", function (snapshot) {
     res.send(snapshot.val());
   });
 });
 
 //Post data to the firebase realtime database:
-app.post("/postData", (req, res) => {
+app.post("/postUserData", (req, res) => {
     db.ref("/users/user1").set(req.body);
     res.send("Data posted successfully");
 });

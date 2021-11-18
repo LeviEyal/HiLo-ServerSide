@@ -1,0 +1,6 @@
+---
+version: 1
+applications:
+- name: my-app
+  memory: 200M
+  instances: 1
