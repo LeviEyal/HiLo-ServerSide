@@ -41,17 +41,9 @@ app.get("/getData", (req, res) => {
 });
 
 //Post data to the firebase realtime database:
-function writeUserDataToFirebase(params) {
-  const dbRef = firebase.database().ref();
-  dbRef
-    .child("users/user1")
-    .set(userData)
-    .then(() => alert("Data successfully submitted"))
-    .catch((reason) => alert(reason));
-}
 app.post("/postData", (req, res) => {
-  db.ref("/").set(req.body);
-  res.send("Data Posted");
+    db.ref("/users/user1").set(req.body);
+    res.send("Data posted successfully");
 });
 
 //Start the server:
