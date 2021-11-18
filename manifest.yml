@@ -2,5 +2,5 @@
 version: 1
 applications:
 - name: my-app
-  memory: 200M
+  memory: 180M
   instances: 1
